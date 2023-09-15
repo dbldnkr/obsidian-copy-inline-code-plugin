@@ -7,10 +7,15 @@ export class CopyWidget extends WidgetType {
     }
 
   toDOM(view: EditorView): HTMLElement {
-    const icon = createSpan({cls: "copy-to-clipboard-icon", text: "\xa0📋"})
+    const copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="14px" viewBox="0 0 24 24" width="14px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>`;
+    const icon = createSpan({
+      cls: "copy-to-clipboard-icon",
+    })
+    icon.innerHTML = copyIcon;
+    icon.style.verticalAlign = '3%';
 
     icon.onclick = (event) => {
-        const element = (event.target as HTMLElement)
+        const element = (event.currentTarget as HTMLElement)
         let previousElement = element.previousElementSibling
         while(previousElement && !previousElement.matches('.cm-inline-code:not(.cm-formatting)')) {
           previousElement = previousElement.previousElementSibling
